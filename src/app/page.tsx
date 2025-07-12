@@ -1,11 +1,97 @@
+"use client"
+
 import TerminalOverlay from '@/components/TerminalOverlay'
 import { Button } from '@/components/ui/button'
 import UserPrograms from '@/components/UserPrograms'
-import { ArrowRightIcon } from 'lucide-react'
+import { ArrowDownCircleIcon, ArrowRightIcon, Loader2, MessageCircle, Send, X } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import {motion, AnimatePresence} from "framer-motion"
+import { init } from 'next/dist/compiled/webpack/webpack'
+import { initialize } from 'next/dist/server/lib/render-server'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import {useChat} from "@ai-sdk/react"
+import { Input } from '@/components/ui/input'
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm";
 
 const HomePage = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showChatIcon, setShowChatIcon] = useState(false);
+  const chatIconRef = useRef<HTMLButtonElement>(null);
+
+  const {
+    messages, 
+    input, 
+    handleInputChange, 
+    handleSubmit,
+    isLoading, 
+    stop, 
+    reload, 
+    error,
+  } = useChat({
+    api: "/aiapi/gemini"
+  });
+
+  const scrollRef= useRef<HTMLDivElement>(null);
+
+   useEffect(() => {
+      const originalError = console.error;
+      // override console.error to ignore "Meeting has ended" errors
+      console.error = function (msg, ...args) {
+        if (
+          msg &&
+          (msg.includes("Do not pass children as props.") ||
+            (args[0] && args[0].toString().includes("Do not pass children as props.")))
+        ) {
+          console.log("Ignoring known error: Meeting has ended");
+          return; // don't pass to original handler
+        }
+  
+        // pass all other errors to the original handler
+        return originalError.call(console, msg, ...args);
+      };
+  
+      // restore original handler on unmount
+      return () => {
+        console.error = originalError;
+      };
+    }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if(window.scrollY > 200){
+        setShowChatIcon(true);
+      } else{
+        setShowChatIcon(false);
+        setIsChatOpen(false);
+      }
+    }
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+
+    
+  };
+
+  useEffect(() => {
+    if(scrollRef.current){
+      scrollRef.current.scrollIntoView({behavior: "smooth"});
+    }
+
+  },[messages]);
+
+
   return (
     <div>
        <div className='flex flex-col min-h-screen text-foreground overflow-hidden'>
@@ -112,9 +198,152 @@ const HomePage = () => {
         </section>
 
         <UserPrograms/>
+        {/* CHAT ICON */}
+        <AnimatePresence>
+          {showChatIcon && (
+            <motion.div
+              initial ={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100 }}
+              transition={{ duration: 0.2 }}
+              className='fixed bottom-4 right-4 z-50'
+
+            >
+              <Button ref={chatIconRef} onClick={toggleChat} size="icon" className='rounded-full size-14 p-2 shadow-large' >
+                {!isChatOpen ? (
+                  <MessageCircle className='size-6' />
+                ): (
+                  <ArrowDownCircleIcon className='size-6'/>
+                )}
+
+              </Button>
+
+            </motion.div>
+          )};
+
+        </AnimatePresence>
+        <AnimatePresence>
+          {isChatOpen && (
+            <motion.div
+            initial={{ opacity: 0, scale: 0.8}}
+            animate={{ opacity: 1, scale: 1}}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            className='fixed bottom-20 right-4 z-50 w-[35%] md:w-[500px'
+
+            >
+              <Card className='border-2'>
+                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-3'>
+                  <CardTitle className='text-xl font-bold'>
+                    Chat with FitAura AI
+                  </CardTitle>
+                  <Button
+                    onClick={toggleChat}
+                    size="sm"
+                    variant = "ghost"
+                    className='px-2 py-0'
+
+                  >
+                    <X className='size-5' />
+                    <span className='sr-only'>Close chat</span>
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  <ScrollArea className='h-[300px] pr-4'>
+                    {messages?.length === 0 &&  !error &&(
+                      <div className='w-full mt-27 text-gray-500 text-lg items-center justify-center flex gap-3'>
+                        No messages yet.
+                      </div>
+                    )}
+                    {messages?.length > 0 && !error && messages?.map((message,index) => (
+                      <div
+                        key={index}
+                        className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}
+                      >
+                        <div className={`inline-block p-4 rounded-lg  ${message.role === 'user' ? 'bg-primary text-primary-foreground': 'bg-muted'}`}>
+                          <ReactMarkdown
+                            children={message.content}
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              code({node, className, children, ...props}) {
+                                // @ts-ignore: 'inline' is not in the type but is provided by react-markdown
+                                const isInline = props.inline;
+                                return isInline ? (
+                                  <code {...props} className='bg-gray-200 px-1 rounded'>{children}</code>
+                                ): (
+                                  <pre {...{...props, ref: undefined}} className='bg-gray-200 p-2 rounded'>
+                                    <code>{children}</code>
+                                  </pre>
+                                );
+                              },
+                              ul: ({children}) => (
+                                <ul className='list-disc ml-4'>{children}</ul>
+                              ),
+                              ol: ({children}) => (
+                                <li className=' list-decimal ml-4'>{children}</li>
+                              ),
+                            }}
+                          />
+                        </div>
+                        
+                      </div>
+                    ))}
+
+                    {isLoading && (
+                      <div className='w-full items-center flex justify-center gap-3'>
+                        <Loader2 className='animate-spin h-5 w-5 text-primary' />
+                        <button
+                          className='underline'
+                          type="button"
+                          onClick={() => stop()}
+                        >
+                          abort
+                        </button>
+                      </div>
+                    )}
+                    {error && (
+                      <div className='w-full mt-30 items-center flex justify-center gap-3'>
+                        <div>An error occured.</div>
+                        <button 
+                        className='underline'
+                        type="button"
+                        onClick={() => 
+                          reload()}
+                        >
+                          Retry
+                        </button>
+
+                      </div>
+                    )}
+
+                    <div ref={scrollRef}></div>
+
+
+                  </ScrollArea>
+                </CardContent>
+                <CardFooter>
+                  <form onSubmit={handleSubmit} 
+                  className='flex w-full items-center space-x-2'
+                  >
+                    <Input value={input} onChange={handleInputChange} className='flex-1 size-10' placeholder='Type your message here...' />
+                    <Button type="submit" className='size-10' disabled={isLoading} size="icon">
+                      <Send className='size-4' />
+                    </Button>
+                    
+                  </form>
+                </CardFooter>
+              </Card>
+
+            </motion.div>
+
+          )}
+        </AnimatePresence> 
+        
+
 
        </div>
     </div>
+    
   )
 }
 
