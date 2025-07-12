@@ -262,11 +262,10 @@ const HomePage = () => {
                       >
                         <div className={`inline-block p-4 rounded-lg  ${message.role === 'user' ? 'bg-primary text-primary-foreground': 'bg-muted'}`}>
                           <ReactMarkdown
-                            children={message.content}
                             remarkPlugins={[remarkGfm]}
                             components={{
                               code({node, className, children, ...props}) {
-                                // @ts-ignore: 'inline' is not in the type but is provided by react-markdown
+                                // @ts-expect-error: 'inline' is not in the type but is provided by react-markdown
                                 const isInline = props.inline;
                                 return isInline ? (
                                   <code {...props} className='bg-gray-200 px-1 rounded'>{children}</code>
@@ -283,7 +282,9 @@ const HomePage = () => {
                                 <li className=' list-decimal ml-4'>{children}</li>
                               ),
                             }}
-                          />
+                          >
+                            {message.content}
+                          </ReactMarkdown>
                         </div>
                         
                       </div>
