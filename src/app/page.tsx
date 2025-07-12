@@ -3,7 +3,7 @@
 import TerminalOverlay from '@/components/TerminalOverlay'
 import { Button } from '@/components/ui/button'
 import UserPrograms from '@/components/UserPrograms'
-import { ArrowDownCircleIcon, ArrowRightIcon, Loader2, MessageCircle, Send, X } from 'lucide-react'
+import { ArrowDownCircleIcon, ArrowRightIcon, Loader2, MessageCircle, Send, X, ZapIcon } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import {motion, AnimatePresence} from "framer-motion"
@@ -229,14 +229,18 @@ const HomePage = () => {
             animate={{ opacity: 1, scale: 1}}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className='fixed bottom-20 right-4 z-50 w-[35%] md:w-[500px'
+            className='fixed bottom-20 right-4 z-50 w-[95%] md:w-[510px]'
 
             >
               <Card className='border-2'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-3'>
-                  <CardTitle className='text-xl font-bold'>
+                  
+                  <CardTitle className='flex items-center gap-2 text-xl font-bold'>
+                    <ZapIcon className=" text-primary w-5" />
                     Chat with FitAura AI
+                    
                   </CardTitle>
+                  
                   <Button
                     onClick={toggleChat}
                     size="sm"
@@ -247,7 +251,9 @@ const HomePage = () => {
                     <X className='size-5' />
                     <span className='sr-only'>Close chat</span>
                   </Button>
+                  
                 </CardHeader>
+                {/* <hr className='-translate-y-5' /> */}
                 <CardContent>
                   <ScrollArea className='h-[300px] pr-4'>
                     {messages?.length === 0 &&  !error &&(
