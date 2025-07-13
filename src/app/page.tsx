@@ -36,32 +36,11 @@ const HomePage = () => {
 
   const scrollRef= useRef<HTMLDivElement>(null);
 
-   useEffect(() => {
-      const originalError = console.error;
-      // override console.error to ignore "Meeting has ended" errors
-      console.error = function (msg, ...args) {
-        if (
-          msg &&
-          (msg.includes("Do not pass children as props.") ||
-            (args[0] && args[0].toString().includes("Do not pass children as props.")))
-        ) {
-          console.log("Ignoring known error: Meeting has ended");
-          return; // don't pass to original handler
-        }
   
-        // pass all other errors to the original handler
-        return originalError.call(console, msg, ...args);
-      };
-  
-      // restore original handler on unmount
-      return () => {
-        console.error = originalError;
-      };
-    }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if(window.scrollY > 200){
+      if(window.scrollY > 100){
         setShowChatIcon(true);
       } else{
         setShowChatIcon(false);
@@ -255,10 +234,12 @@ const HomePage = () => {
                 </CardHeader>
                 {/* <hr className='-translate-y-5' /> */}
                 <CardContent>
-                  <ScrollArea className='h-[300px] pr-4'>
+                  <ScrollArea className='h-[420px] pr-4'>
                     {messages?.length === 0 &&  !error &&(
-                      <div className='w-full mt-27 text-gray-500 text-lg items-center justify-center flex gap-3'>
-                        No messages yet.
+                      <div className='w-full mt-33 text-gray-300  items-center justify-center text-center flex-col gap-3 '>
+                        <p className='text-xl font-bold'>👋 Welcome to FitAura AI</p> 
+                        <br></br>
+                        <p className='-mt-3 text-md'>I&#39;your assistant. Ask me anything about the platform, features, or how we help you build personalized fitness programs.</p>
                       </div>
                     )}
                     {messages?.length > 0 && !error && messages?.map((message,index) => (
@@ -304,7 +285,7 @@ const HomePage = () => {
                           type="button"
                           onClick={() => stop()}
                         >
-                          abort
+                          Cancel
                         </button>
                       </div>
                     )}

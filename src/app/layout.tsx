@@ -52,6 +52,7 @@ export default function RootLayout({
       </html>
     </ConvexClerkProvider>
     </ClerkProvider>
+  
     
   );
 }

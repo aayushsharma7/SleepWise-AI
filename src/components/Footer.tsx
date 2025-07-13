@@ -30,7 +30,7 @@ const Footer = () => {
               href="/about"
               className="text-muted-foreground hover:text-primary transition-colors"
             >
-              About
+              <span>About</span>
             </Link>
             <Link
               href="/terms"
