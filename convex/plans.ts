@@ -7,30 +7,36 @@ export const createPlan = mutation ({
     args: {
         userId: v.string(),
         name: v.string(),
-        workoutPlan: v.object({
+        sleepPlan: v.object({
             schedule: v.array(v.string()),
-            exercises: v.array(
+            timeline: v.array(
                 v.object({
                     day: v.string(),
                     routines: v.array(
                         v.object({
-                            name: v.string(),
-                            sets: v.number(),
-                            reps: v.number(),
+                            time: v.string(),
+                            activity: v.string(),
+                            notes: v.string(),
                         })
                     ),
                 })
             ),
         }),
-        dietPlan: v.object({
-        dailyCalories: v.number(),
-        meals: v.array(
+        recPlan: v.object({
+        sleepEfficiency: v.number(),
+        solutions: v.array(
             v.object({
             name: v.string(),
-            foods: v.array(v.string()),
+            tips: v.array(v.string()),
             })
         ),
         }),
+
+        sleepScore: v.object({
+            score: v.number(),
+            reason: v.string(),
+        }),
+
         isActive: v.boolean(),
     },
     handler: async (ctx,args) => {
@@ -59,10 +65,5 @@ export const getUserPlans = query({
             .order("desc")
             .collect();
         return plans;
-        
-
-
-
-        
     }
 })

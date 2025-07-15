@@ -180,18 +180,17 @@ const GenerateProgramPage = () => {
       <div className='container mx-auto px-4 h-full max-w-5xl'>
       {/* Title */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold font-mono">
-            <span>Generate Your </span>
-            <span className="text-primary uppercase">Fitness Program</span>
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-400 to-accent bg-clip-text text-transparent ">
+            <span>Welcome to Sleep</span>
+            <span className="text-primary">Wise.ai</span>
           </h1>
-          <p className="text-muted-foreground mt-2">
-            Have a voice conversation with our AI assistant to create your personalized plan
-          </p>
+          <p className="text-muted-foreground mt-6">
+            Have a quick conversation with SleepWise AI to build a custom sleep plan that fits your daily grind — whether you're a night-owl student or a sleep-deprived professional.          </p>
         </div>
           {/* VIDEO CALL AREA */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {/* AI ASSISTANT CARD */}
-          <Card className="bg-card/90 backdrop-blur-sm border border-border overflow-hidden relative">
+          <Card className="bg-card/90 backdrop-blur-sm border-primary overflow-hidden relative">
             <div className='aspect-video flex flex-col items-center justify-center p-6 relative'>
               {/* ai voice animation wave */}
               <div
@@ -226,14 +225,14 @@ const GenerateProgramPage = () => {
                 <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-secondary/10"></div>
                   <img
-                    src="/ai-avatar.png"
+                    src="/coach5.png"
                     alt="AI Assistant"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
-              <h2 className="text-xl font-bold text-foreground">FitAura AI</h2>
-              <p className="text-sm text-muted-foreground mt-1">Fitness & Diet Coach</p>
+              <h2 className="text-xl font-bold text-foreground">SleepWise AI</h2>
+              <p className="text-sm text-muted-foreground mt-1">Sleep & Recovery Coach</p>
                {/* SPEAKING INDICATOR */}
 
               <div
@@ -259,7 +258,7 @@ const GenerateProgramPage = () => {
             </div>
           </Card>
           {/* USER CARD */}
-          <Card className={`bg-card/90 backdrop-blur-sm border overflow-hidden relative`}>
+          <Card className={`bg-card/90 backdrop-blur-sm border-primary overflow-hidden relative`}>
             <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
               {/* User Image */}
               <div className="relative size-32 mb-4">
@@ -288,13 +287,13 @@ const GenerateProgramPage = () => {
         {messages.length > 0 && (
           <div
             ref={messageContainerRef}
-            className="w-full bg-card/90 backdrop-blur-sm border border-border rounded-xl p-4 mb-8 h-64 overflow-y-auto transition-all duration-300 scroll-smooth"
+            className="scrollbar-transparent w-full bg-card/90 backdrop-blur-sm border border-border rounded-xl p-4 mb-8 h-64 overflow-y-auto transition-all duration-300 scroll-smooth"
           >
             <div className="space-y-3">
               {messages.map((msg, index) => (
                 <div key={index} className="message-item animate-fadeIn">
                   <div className="font-semibold text-xs text-muted-foreground mb-1">
-                    {msg.role === "assistant" ? "FitAura AI" : "You"}:
+                    {msg.role === "assistant" ? "SleepWise AI" : "You"}:
                   </div>
                   <p className="text-foreground">{msg.content}</p>
                 </div>
@@ -304,7 +303,7 @@ const GenerateProgramPage = () => {
                 <div className="message-item animate-fadeIn">
                   <div className="font-semibold text-xs text-primary mb-1">System:</div>
                   <p className="text-foreground">
-                    Your fitness program has been created! Redirecting to your profile...
+                    Your sleep program has been created! Redirecting to your profile...
                   </p>
                 </div>
               )}
@@ -319,8 +318,8 @@ const GenerateProgramPage = () => {
                 ? "bg-destructive hover:bg-destructive/90"
                 : callEnded
                   ? "bg-green-600 hover:bg-green-700"
-                  : "bg-primary hover:bg-primary/90"
-            } text-white relative`}
+                  : "bg-green-500 hover:bg-green-400"
+            } bg-gradient-to-r from-purple-400 to-accent  text-black relative font-sans font-bold`}
             onClick={toggleCall}
             disabled={connecting || callEnded}
           >
@@ -335,7 +334,7 @@ const GenerateProgramPage = () => {
                   ? "Connecting..."
                   : callEnded
                     ? "View Profile"
-                    : "Start Call"}
+                    : "Let's Begin"}
             </span>
           </Button>
         </div>

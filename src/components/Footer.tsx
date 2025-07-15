@@ -1,4 +1,4 @@
-import { ZapIcon } from "lucide-react";
+import { MoonStarIcon, ZapIcon } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
@@ -13,19 +13,19 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start gap-2">
             <Link href="/" className="flex items-center gap-2">
               <div className="p-1 bg-primary/10 rounded">
-                <ZapIcon className="w-4 h-4 text-primary" />
+                <MoonStarIcon className="w-4 h-4 text-primary" />
               </div>
               <span className="text-xl font-bold font-mono">
-                fit<span className="text-primary">aura</span>.ai
+                Sleep<span className="text-primary">Wise</span>.ai
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} fitaura.ai - All rights reserved
+              © {new Date().getFullYear()} SleepWise.ai - All rights reserved
             </p>
           </div>
 
           {/* Links */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-2 text-sm">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-2 text-sm -mr-50">
             <Link
               href="/about"
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -67,7 +67,7 @@ const Footer = () => {
           {/* Status */}
           <div className="flex items-center gap-2 px-3 py-2 border border-border rounded-md bg-background/50">
             <div className="w-2 h-2 rounded-full bg-green-500"></div>
-            <span className="text-xs font-mono">SYSTEM OPERATIONAL</span>
+            <span className="text-xs font-mono">SleepWise AI always awake while you sleep peacefully</span>
           </div>
         </div>
       </div>

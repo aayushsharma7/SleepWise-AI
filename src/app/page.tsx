@@ -3,7 +3,7 @@
 import TerminalOverlay from '@/components/TerminalOverlay'
 import { Button } from '@/components/ui/button'
 import UserPrograms from '@/components/UserPrograms'
-import { ArrowDownCircleIcon, ArrowRightIcon, Loader2, MessageCircle, Send, X, ZapIcon } from 'lucide-react'
+import { ArrowDownCircleIcon, ArrowRight, ArrowRightIcon, Loader2, MessageCircle, MoonStarIcon, Send, X, ZapIcon } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import {motion, AnimatePresence} from "framer-motion"
@@ -74,109 +74,115 @@ const HomePage = () => {
   return (
     <div>
        <div className='flex flex-col min-h-screen text-foreground overflow-hidden'>
-        <section className="relative z-10 py-24 flex-grow">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
-              {/* corner decoration */}
-              <div className="absolute -top-10 left-0 w-40 h-40 border-l-2 border-t-2" />
-              {/* left side */}
-              <div className="lg:col-span-7 space-y-8 relative">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <div>
-                  <span className="text-foreground">Transform</span>
-                </div>
-                <div>
-                  <span className="text-primary">Your Body</span>
-                </div>
-                <div className="pt-2">
-                  <span className="text-foreground">With Advanced</span>
-                </div>
-                <div className="pt-2">
-                  <span className="text-foreground">AI</span>
-                  <span className="text-primary"> Technology</span>
-                </div>
-              </h1>
-              {/* seperator line */}
-              <div className="h-px w-full bg-gradient-to-r from-primary via-secondary to-primary opacity-50"></div>
-              <p className="text-xl text-muted-foreground w-2/3">
-                Talk to our AI assistant and get personalized diet plans and workout routines
-                designed just for you
-              </p>
+        <section className="relative w-full px-6 py-24 overflow-hidden">
+          {/* Subtle Background Effects */}
+          
+          
+          <div className="relative grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+            {/* Left Content */}
+            <div className="space-y-8 z-10">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 ">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-primary">AI-Powered Sleep Optimisation</span>
+              </div>
 
-              {/* stats */}
-              <div className="flex items-center gap-10 py-6 font-mono">
-                <div className="flex flex-col">
-                  <div className="text-2xl text-primary">500+</div>
-                  <div className="text-xs uppercase tracking-wider">ACTIVE USERS</div>
+              {/* Main Heading */}
+              <div className="space-y-4 -mt-5">
+                <h1 className="text-5xl lg:text-7xl font-bold">
+                  <span className="block text-foreground">Resync Your</span>
+                  <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    Your Sleep
+                  </span>
+                  <span className="block text-foreground">With Smart</span>
+                  <span className="block text-accent">AI Insights</span>
+                </h1>
+                
+                <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
+                  We help students & professionals rebuild their sleep routines to maximize energy and focus.
+                </p>
+                {/* no tracking, just smart planning */}
+              </div>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
+                  <div className="text-2xl font-bold text-primary">1000+</div>
+                  <div className="text-sm text-muted-foreground">Better Sleepers</div>
                 </div>
-                <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
-                <div className="flex flex-col">
-                  <div className="text-2xl text-primary">3min</div>
-                  <div className="text-xs uppercase tracking-wider">GENERATION</div>
+                <div className="p-4 rounded-xl bg-card border border-border hover:border-accent/30 transition-colors">
+                  <div className="text-2xl font-bold text-accent">7.5hrs</div>
+                  <div className="text-sm text-muted-foreground">Avg Quality</div>
                 </div>
-                <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
-                <div className="flex flex-col">
-                  <div className="text-2xl text-primary">100%</div>
-                  <div className="text-xs uppercase tracking-wider">PERSONALIZED</div>
+                <div className="p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
+                  <div className="text-2xl font-bold text-primary">95%</div>
+                  <div className="text-sm text-muted-foreground">Satisfaction</div>
                 </div>
               </div>
 
-              {/* button */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Button
-                  size="lg"
-                  asChild
-                  className="overflow-hidden bg-primary text-primary-foreground px-8 py-6 text-lg font-medium"
-                >
-                  <Link href={"/generate-program"} className="flex items-center font-mono">
-                    Build Your Program
-                    <ArrowRightIcon className="ml-2 size-5" />
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="default" size="lg" className="group bg-gradient-to-r from-primary to-accent ">
+                  <Link href={"/generate-program"}>
+                    Start Your Sleep Journey
+                  </Link>
+                  
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <Button variant="outline" size="lg">
+                  <Link href={"/generate-program"}>
+                    Know More
                   </Link>
                 </Button>
               </div>
-              </div>
-
-               {/* RIGHT SIDE CONTENT */}
-            <div className="lg:col-span-5 relative">
-              {/* CORNER PIECES */}
-              <div className="absolute -inset-4 pointer-events-none">
-                <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-border" />
-                <div className="absolute top-0 right-0 w-16 h-16 border-r-2 border-t-2 border-border" />
-                <div className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-border" />
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-border" />
-              </div>
-              {/* IMAGE CONTANINER */}
-              <div className="relative aspect-square max-w-lg mx-auto">
-                <div className="relative overflow-hidden rounded-lg bg-cyber-black">
-                  <img
-                    src="/hero-ai3.png"
-                    alt="AI Fitness Coach"
-                    className="size-full object-cover object-center"
-                  />
-                   {/* SCAN LINE */}
-                  <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,transparent_calc(50%-1px),var(--cyber-glow-primary)_50%,transparent_calc(50%+1px),transparent_100%)] bg-[length:100%_8px] animate-scanline pointer-events-none" />
-                   {/* DECORATIONS ON TOP THE IMAGE */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 border border-primary/40 rounded-full" />
-                    {/* Targeting lines */}
-                    <div className="absolute top-1/2 left-0 w-1/4 h-px bg-primary/50" />
-                    <div className="absolute top-1/2 right-0 w-1/4 h-px bg-primary/50" />
-                    <div className="absolute top-0 left-1/2 h-1/4 w-px bg-primary/50" />
-                    <div className="absolute bottom-0 left-1/2 h-1/4 w-px bg-primary/50" />
-
-                  </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-
-                </div>
-                {/* TERMINAL OVERLAY */}
-                <TerminalOverlay />
-              </div>
             </div>
+
+            {/* Right Content - Hero Image */}
+            <div className="relative z-10">
+              <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-[0_0_40px_0_rgba(108,59,170,0.5)]">
+                <img 
+                  src="/heroai3.png" 
+                  alt="SleepWise AI Assistant" 
+                  className="w-full h-[600px] object-cover "
+                />
+                
+                {/* Top Stats Card */}
+                <div className="absolute top-6 right-6">
+                  <div className="bg-card/95 backdrop-blur-sm rounded-xl p-3 border border-primary/20">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-xs font-medium text-green-500">LIVE</span>
+                    </div>
+                    <div className="text-lg font-bold text-foreground">8h 15m</div>
+                    <div className="text-xs text-muted-foreground">Tonight's Goal</div>
+                  </div>
+                </div>
+
+                {/* Bottom Status Panel */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-card/95 backdrop-blur-sm rounded-xl p-4 border border-primary/20">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                      <span className="text-sm font-medium text-yellow-400">Sleep Analysis</span>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2 text-foreground">
+                        <span>💤</span>
+                        <span>Optimal bedtime: 10:30 PM</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-foreground">
+                        <span>🎯</span>
+                        <span>Sleep score: 92%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-
+      </section>
         <UserPrograms/>
+        
         {/* CHAT ICON */}
         <AnimatePresence>
           {showChatIcon && (
@@ -208,15 +214,15 @@ const HomePage = () => {
             animate={{ opacity: 1, scale: 1}}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className='fixed bottom-20 right-4 z-50 w-[95%] md:w-[510px]'
+            className='fixed bottom-20 right-4 z-50 w-[95%] md:w-[475px]'
 
             >
               <Card className='border-2'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-3'>
                   
                   <CardTitle className='flex items-center gap-2 text-xl font-bold'>
-                    <ZapIcon className=" text-primary w-5" />
-                    Chat with FitAura AI
+                    <MoonStarIcon className=" text-primary w-5" />
+                    Chat with SleepWise Assistant
                     
                   </CardTitle>
                   
@@ -234,12 +240,12 @@ const HomePage = () => {
                 </CardHeader>
                 {/* <hr className='-translate-y-5' /> */}
                 <CardContent>
-                  <ScrollArea className='h-[420px] pr-4'>
+                  <ScrollArea className='h-[380px] pr-4'>
                     {messages?.length === 0 &&  !error &&(
-                      <div className='w-full mt-33 text-gray-300  items-center justify-center text-center flex-col gap-3 '>
-                        <p className='text-xl font-bold'>👋 Welcome to FitAura AI</p> 
+                      <div className='w-full mt-33 text-gray-400  items-center justify-center text-center flex-col gap-3 '>
+                        <p className='text-xl font-bold'>💜 Welcome to SleepWise AI</p> 
                         <br></br>
-                        <p className='-mt-3 text-md'>I&#39;your assistant. Ask me anything about the platform, features, or how we help you build personalized fitness programs.</p>
+                        <p className='-mt-3 text-md'>I&#39;m your assistant. Ask me anything about the platform, features, or how we help you build personalized routines.</p>
                       </div>
                     )}
                     {messages?.length > 0 && !error && messages?.map((message,index) => (
@@ -326,9 +332,6 @@ const HomePage = () => {
 
           )}
         </AnimatePresence> 
-        
-
-
        </div>
     </div>
     

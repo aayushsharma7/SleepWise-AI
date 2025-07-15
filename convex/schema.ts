@@ -13,14 +13,14 @@ export default defineSchema({
     plans: defineTable({
         userId: v.string(),
         name: v.string(),
-        workoutPlan: v.object({
+        sleepPlan: v.object({
             schedule: v.array(v.string()),
-            exercises: v.array(v.object({
+            timeline: v.array(v.object({
                 day: v.string(),
                 routines: v.array(v.object({
-                    name: v.string(),
-                    sets: v.optional(v.number()),
-                    reps: v.optional(v.number()),
+                    time: v.string(),
+                    activity: v.optional(v.string()),
+                    notes: v.optional(v.string()),
                     duration: v.optional(v.string()),
                     description: v.optional(v.string()),
                     exercises: v.optional(v.array(v.string())),
@@ -28,12 +28,17 @@ export default defineSchema({
             }))
         }),
 
-        dietPlan: v.object({
-            dailyCalories: v.number(),
-            meals: v.array(v.object({
+        recPlan: v.object({
+            sleepEfficiency: v.number(),
+            solutions: v.array(v.object({
                 name: v.string(),
-                foods: v.array(v.string())
+                tips: v.array(v.string())
             }))
+        }),
+
+        sleepScore: v.object({
+            score: v.number(),
+            reason: v.string(),
         }),
 
         isActive: v.boolean(),
