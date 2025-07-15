@@ -106,6 +106,8 @@ function validateSleepPlan(plan: any) {
         time: routine.time,
         activity: typeof routine.activity === "string" ? routine.activity : parseInt(routine.activity) || 1,
         notes: typeof routine.notes === "string" ? routine.notes : parseInt(routine.notes) || 10,
+        description: typeof routine.description === "string" ? routine.description : parseInt(routine.description) || 1,
+        duration: typeof routine.duration === "string" ? routine.duration : parseInt(routine.duration) || 10,
       })),
     })),
   };
@@ -168,72 +170,61 @@ http.route({
 
             const sleepPrompt = `You are a certified sleep coach and lifestyle planner. You will generate a personalized daily sleep routine plan based on:
 
-                - Age: ${age}
-                - Profession: ${profession}
-                - Wake-up Time: ${wakeuptime}
-                - Sleep Time: ${sleeptime}
-                - Reported Sleep Problems: ${problem}
-                - Daily Work or Study Hours: ${workhours}
-                - Sleep Goal: ${sleep_goal}
-                - Average Current Sleep (hrs): ${avg_sleep}
+- Age: {{age}}
+- Profession: {{profession}}
+- Wake-up Time: {{wakeuptime}}
+- Sleep Time: {{sleeptime}}
+- Reported Sleep Problems: {{problem}}
+- Daily Work or Study Hours: {{workhours}}
+- Sleep Goal: {{sleep_goal}}
+- Average Current Sleep (hrs): {{avg_sleep}}
 
-                As a sleep specialist:
-                - Create a daily routine that balances work/study and sleep needs
-                - Suggest exact wind-down times and morning routines around their schedule
-                - Adjust recommendations based on sleep issues (e.g., insomnia, late phone use, irregular hours)
-                - Account for their profession and optimize sleep quality without disrupting productivity
-                - Include blocks like "Wind Down", "Phone Off", "In Bed", "Wake Up", "Light Exposure", "Focus Block", etc.
-                - Dont repeat the schedule for all days, make schedule of each day unique and natural.
-                - Give schedule for whole day i.e 24hrs and make study hours/work hours fit into properly with sleep as required.
-                - Make the plans realistic and human like dont just change the wake up and sleep times on all days just to be unique, make the whol daily routines natural and full personalised for the profession and workhours/studyhours.
-                
+Instructions:
+- Balance work/study with sleep needs
+- Suggest specific wind-down and morning routines based on the wake/sleep times
+- Address sleep problems (e.g. insomnia, late phone use, irregular hours)
+- Tailor for their profession while preserving productivity and wellness
+- Include realistic blocks like: "Wind Down", "Phone Off", "In Bed", "Wake Up", "Light Exposure", "Focus Block", "Break", "Dinner", etc.
+- Make each day unique but realistic. Don't randomize wake/sleep time every day — vary naturally based on context.
+- Fit work/study into the 24-hour routine realistically.
+- **Every routine must include: time, activity, notes, duration, and description**
+- Do NOT include any general commentary or advice outside the JSON.
 
-                CRITICAL SCHEMA INSTRUCTIONS:
-                - Your output MUST contain ONLY the fields specified below, NO ADDITIONAL FIELDS
-                - Every time block must be part of a specific day (e.g., "Monday") inside a timeline object
-                - Time must be in clear format (e.g., "10:00 PM")
-                - DO NOT include generic text like "Sleep early" — be precise
-                - All string values should be clean and free from excessive explanation
+STRICT OUTPUT FORMAT (you MUST follow this schema exactly):
+{
+  "schedule": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  "timeline": [
+    {
+      "day": "Monday",
+      "routines": [
+        {
+          "time": "6:30 AM",
+          "activity": "Wake Up & Light Exposure",
+          "notes": "Open blinds or step outside",
+          "duration": "15 min",
+          "description": "Natural light helps reset circadian rhythm"
+        },
+        {
+          "time": "9:30 PM",
+          "activity": "Wind Down",
+          "notes": "Dim lights and avoid screens",
+          "duration": "30 min",
+          "description": "Prepares the body for restful sleep"
+        },
+        {
+          "time": "10:00 PM",
+          "activity": "In Bed",
+          "notes": "Lights off, no phone",
+          "duration": "8 hrs",
+          "description": "Ensure full night's rest"
+        }
+      ]
+    }
+  ]
+}
 
-                Return a JSON object with this EXACT structure:
-                {
-                "schedule": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                "timeline": [
-                    {
-                    "day": "Monday",
-                    "routines": [
-                        {
-                        "time": "9:30 PM",
-                        "activity": "Wind Down",
-                        "notes": "Avoid screens, dim the lights",
-                        "duration": "30 min",
-                        "description": "Start relaxing activity like reading or journaling"
-                        },
-                        {
-                        "time": "10:00 PM",
-                        "activity": "In Bed",
-                        "notes": "Lights fully off",
-                        "duration": "8 hrs",
-                        "description": "Target sleep duration"
-                        },
-                        {
-                        "time": "6:00 AM",
-                        "activity": "Wake Up",
-                        "notes": "Expose to natural light",
-                        "duration": "15 min",
-                        "description": "Helps regulate circadian rhythm"
-                        }
-                    ]
-                    }
-                ]
-                }
-
-                DO NOT add any fields that are not in this example. Your response must be a valid JSON object with no additional text.`;
-
-            
-            
-
-
+Only return a valid JSON object in this exact structure — do not add any other text.
+`;
             const recPrompt = `You are a certified sleep specialist and behavioral health expert creating personalized sleep improvement recommendations based on:
 
                     - Age: ${age}

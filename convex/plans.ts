@@ -17,6 +17,8 @@ export const createPlan = mutation ({
                             time: v.string(),
                             activity: v.string(),
                             notes: v.string(),
+                            duration: v.string(),
+                            description:v.string(),
                         })
                     ),
                 })

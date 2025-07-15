@@ -18,11 +18,11 @@ export default defineSchema({
             timeline: v.array(v.object({
                 day: v.string(),
                 routines: v.array(v.object({
-                    time: v.string(),
-                    activity: v.optional(v.string()),
-                    notes: v.optional(v.string()),
+                    time: (v.string()),
+                    activity: (v.string()),
+                    notes: (v.string()),
                     duration: v.optional(v.string()),
-                    description: v.optional(v.string()),
+                    description:v.optional(v.string()),
                     exercises: v.optional(v.array(v.string())),
                 }))
             }))

@@ -30,7 +30,7 @@ import {
   Home, // Added import for Home icon
   Activity, // Added import for Activity icon
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useUser } from "@clerk/nextjs"
 import { useQuery } from "convex/react"
 import { api } from "../../../convex/_generated/api"
@@ -158,9 +158,9 @@ const userData = {
 
 const getActivityIcon = (activity: string) => {
   switch (activity) {
-    case "Wake Up & Light Exposure":
+    case "Wake Up & Light Exposure || Morning Routine":
       return <Sun className="h-5 w-5" />
-    case "Focus Block":
+    case "Focus Block 1 || Focus Block 2 || Focus Block 3":
       return <Focus className="h-5 w-5" />
     case "Wind Down":
       return <Moon className="h-5 w-5" />
@@ -171,6 +171,9 @@ const getActivityIcon = (activity: string) => {
   }
 }
 
+
+
+
 const weeklyProgress = [
   { day: "Mon", completed: true, score: 85 },
   { day: "Tue", completed: true, score: 78 },
@@ -180,6 +183,8 @@ const weeklyProgress = [
   { day: "Sat", completed: false, score: 0 },
   { day: "Sun", completed: false, score: 0 },
 ]
+
+
 
 export default function Dashboard() {
   const [selectedDay, setSelectedDay] = useState("Monday")
@@ -197,7 +202,42 @@ export default function Dashboard() {
 
   const activePlan = allPlans?.find((plan) => plan.isActive)
 
-  const selectedDayData = sampleSleepPlan.sleepPlan.timeline.find((day) => day.day === selectedDay)
+  const currentPlan = selectedPlanId
+    ? allPlans?.find((plan) => plan._id === selectedPlanId)
+    : activePlan;
+  const selectedDayData = currentPlan?.sleepPlan.timeline.find((day) => day.day === selectedDay)
+  const today = new Date().toLocaleString("en-US", {
+  timeZone: "Asia/Kolkata",
+  weekday: "long",
+})
+
+const todayRoutines = currentPlan?.sleepPlan.timeline.find((d) => d.day === today)?.routines || []
+
+const now = new Date()
+
+const getTodayIndex = () => {
+  const today = new Date().getDay(); // Sunday = 0
+  return today === 0 ? 6 : today - 1; // Make Monday = 0
+}
+
+
+
+const upcomingToday = todayRoutines
+  .filter((routine) => {
+    const [timeStr, modifier] = routine.time.split(" ")
+    let [hours, minutes] = timeStr.split(":").map(Number)
+
+    if (modifier.toLowerCase() === "pm" && hours !== 12) hours += 12
+    if (modifier.toLowerCase() === "am" && hours === 12) hours = 0
+
+    const routineTime = new Date()
+    routineTime.setHours(hours, minutes, 0, 0)
+    return routineTime > now
+  })
+  .slice(0, 3) // 👈 LIMIT to 3
+
+
+  
 
   return (
     <div className="min-h-screen mt-15">
@@ -273,7 +313,7 @@ export default function Dashboard() {
                           <div className="text-xs text-gray-400">Plans Created</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-lg font-bold text-white">{sampleSleepPlan.sleepScore.score}</div>
+                          <div className="text-lg font-bold text-white">{currentPlan?.sleepScore.score}</div>
                           <div className="text-xs text-gray-400">Sleep Score</div>
                         </div>
                       </div>
@@ -287,7 +327,22 @@ export default function Dashboard() {
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-gray-400">Plan created on</div>
-                      <div className="text-white font-medium">{userData.memberSince}</div>
+                      <div className="text-white font-medium">
+                        <span>
+                          {currentPlan?._creationTime &&
+                            new Date(currentPlan._creationTime)
+                              .toLocaleString("en-IN", {
+                                timeZone: "Asia/Kolkata",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              })
+                              .replace(/am|pm/, (match) => match.toUpperCase())}
+                        </span>
+                      </div>
                     </div>
                     <Button
                       variant="outline"
@@ -311,8 +366,8 @@ export default function Dashboard() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="-mt-6 mb-5 text-5xl font-bold text-white">{sampleSleepPlan.sleepScore.score}</div>
-                  <p className="text-xs text-white/70">{sampleSleepPlan.sleepScore.reason}</p>
+                  <div className="-mt-6 mb-5 text-5xl font-bold text-white">{currentPlan?.sleepScore.score}</div>
+                  <p className="text-xs text-white/70">{currentPlan?.sleepScore.reason}</p>
                   <div className="mt-3">
                     <Progress value={sampleSleepPlan.sleepScore.score} className="h-2 [&>*]:bg-purple-400" />
                   </div>
@@ -327,7 +382,7 @@ export default function Dashboard() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-5xl font-bold text-white -mt-6 mb-5">{sampleSleepPlan.recPlan.sleepEfficiency}%</div>
+                  <div className="text-5xl font-bold text-white -mt-6 mb-5">{currentPlan?.recPlan.sleepEfficiency}%</div>
                   <p className="text-xs text-white/70">Optimization level</p>
                   <div className="mt-3">
                     <Progress value={sampleSleepPlan.recPlan.sleepEfficiency} className="h-2 [&>*]:bg-yellow-600" />
@@ -400,23 +455,24 @@ export default function Dashboard() {
                             strokeWidth="8"
                             fill="none"
                             strokeDasharray={`${2 * Math.PI * 40}`}
-                            strokeDashoffset={`${2 * Math.PI * 40 * (1 - sampleSleepPlan.sleepScore.score / 100)}`}
+                            strokeDashoffset={`${2 * Math.PI * 40 * (1 - ((currentPlan?.sleepScore.score ?? 0) / 100))}`}
                             className="text-purple-500 transition-all duration-1000 ease-out"
                             strokeLinecap="round"
                           />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-5xl font-bold text-white">{sampleSleepPlan.sleepScore.score}</span>
+                          <span className="text-5xl font-bold text-white">{currentPlan?.sleepScore.score}</span>
                           <span className="text-gray-400 text-sm">out of 100</span>
                         </div>
                       </div>
                       <h4 className="text-white font-medium">Reason:</h4>
-                      <p className="text-gray-400 italic text-sm leading-relaxed">"{sampleSleepPlan.sleepScore.reason}"</p>
+                      <p className="text-gray-400 italic text-sm leading-relaxed">"{currentPlan?.sleepScore.reason}"</p>
                     </CardContent>
                   </Card>
 
                   {/* Weekly Progress */}
-                  <Card>
+                  <Card className="bg-gradient-to-br from-[#0a0613] via-[#1a1028] to-[#302044] border-purple-400/30 backdrop-blur-sm">
+                    
                     <CardHeader>
                       <div className="flex items-center space-x-2 mb-2">
                         <CardTitle className="text-white">Weekly Progress</CardTitle>
@@ -448,6 +504,7 @@ export default function Dashboard() {
                           <span className="text-white font-medium">2/7 days</span>
                         </div>
                         <Progress value={28.5} className="h-2" />
+                        
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-400">Average Score</span>
                           <span className="text-white font-medium">81.5</span>
@@ -470,37 +527,27 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="p-4 bg-gradient-to-br from-[#1b002f] via-[#2c0050] to-[#3b0074] rounded-lg border border-gray-700/50 hover:bg-gray-800/70 transition-colors">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <Focus className="h-5 w-5 text-blue-400" />
-                          <span className="text-white font-medium">Focus Block</span>
-                        </div>
-                        <div className="text-sm text-gray-400 mb-1">1:00 PM - 3:00 PM</div>
-                        <Badge variant="outline" className="border-blue-400/50 text-blue-300 text-xs">
-                          Upcoming
-                        </Badge>
-                      </div>
-                      <div className="p-4 bg-gradient-to-br from-[#1b002f] via-[#2c0050] to-[#3b0074] rounded-lg border border-gray-700/50 hover:bg-gray-800/70 transition-colors">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <Moon className="h-5 w-5 text-purple-400" />
-                          <span className="text-white font-medium">Wind Down</span>
-                        </div>
-                        <div className="text-sm text-gray-400 mb-1">9:30 PM - 10:00 PM</div>
-                        <Badge variant="outline" className="border-purple-400/50 text-purple-300 text-xs">
-                          Tonight
-                        </Badge>
-                      </div>
-                      <div className="p-4 bg-gradient-to-br from-[#1b002f] via-[#2c0050] to-[#3b0074] rounded-lg border border-gray-700/50 hover:bg-gray-800/70 transition-colors">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <Bed className="h-5 w-5 text-indigo-400" />
-                          <span className="text-white font-medium">In Bed</span>
-                        </div>
-                        <div className="text-sm text-gray-400 mb-1">10:00 PM - 6:00 AM</div>
-                        <Badge variant="outline" className="border-indigo-400/50 text-indigo-300 text-xs">
-                          Sleep Time
-                        </Badge>
-                      </div>
-                    </div>
+  {upcomingToday.length > 0 ? (
+    upcomingToday.map((routine, index) => (
+      <div
+        key={index}
+        className="p-4 bg-gradient-to-br from-[#1b002f] via-[#2c0050] to-[#3b0074] rounded-lg border border-gray-700/50 hover:bg-gray-800/70 transition-colors"
+      >
+        <div className="flex items-center space-x-3 mb-2">
+          {getActivityIcon(routine.activity)}
+          <span className="text-white font-medium">{routine.activity}</span>
+        </div>
+        <div className="text-sm text-gray-400 mb-1">{routine.time}</div>
+        <Badge variant="outline" className="border-purple-400/50 text-purple-300 text-xs">
+          Upcoming
+        </Badge>
+      </div>
+    ))
+  ) : (
+    <p className="text-gray-400">No more activities for today 🎉</p>
+  )}
+</div>
+
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -519,7 +566,7 @@ export default function Dashboard() {
                   <CardContent className="space-y-6">
                     {/* Day Selector */}
                     <div className="flex space-x-2 overflow-x-auto pb-2">
-                      {sampleSleepPlan.sleepPlan.schedule.map((day) => (
+                      {currentPlan?.sleepPlan.schedule.map((day) => (
                         <Button
                           key={day}
                           variant={selectedDay === day ? "default" : "ghost"}
@@ -581,7 +628,7 @@ export default function Dashboard() {
                       </div>
                       <div className="text-right">
                         <div className="text-gray-400 text-sm">Sleep Efficiency</div>
-                        <div className="text-2xl font-bold text-purple-400">{sampleSleepPlan.recPlan.sleepEfficiency}%</div>
+                        <div className="text-2xl font-bold text-purple-400">{currentPlan?.recPlan.sleepEfficiency}%</div>
                       </div>
                     </div>
                     <CardDescription className="text-gray-400">
@@ -589,7 +636,7 @@ export default function Dashboard() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    {sampleSleepPlan.recPlan.solutions.map((solution, index) => (
+                    {currentPlan?.recPlan.solutions.map((solution, index) => (
                       <Collapsible
                         key={index}
                         open={openRecommendations.includes(solution.name)}
