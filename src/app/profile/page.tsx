@@ -544,26 +544,26 @@ const upcomingToday = todayRoutines
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  {upcomingToday.length > 0 ? (
-    upcomingToday.map((routine, index) => (
-      <div
-        key={index}
-        className="p-4 bg-gradient-to-br from-[#1b002f] via-[#2c0050] to-[#3b0074] rounded-lg border border-gray-700/50 hover:bg-gray-800/70 transition-colors"
-      >
-        <div className="flex items-center space-x-3 mb-2">
-          {getActivityIcon(routine.activity)}
-          <span className="text-white font-medium">{routine.activity}</span>
-        </div>
-        <div className="text-sm text-gray-400 mb-1">{routine.time}</div>
-        <Badge variant="outline" className="border-purple-400/50 text-purple-300 text-xs">
-          Upcoming
-        </Badge>
-      </div>
-    ))
-  ) : (
-    <p className="text-gray-400">No more activities for today 🎉</p>
-  )}
-</div>
+                      {upcomingToday.length > 0 ? (
+                        upcomingToday.map((routine, index) => (
+                          <div
+                            key={index}
+                            className="p-4 bg-gradient-to-br from-[#1b002f] via-[#2c0050] to-[#3b0074] rounded-lg border border-gray-700/50 hover:bg-gray-800/70 transition-colors"
+                          >
+                            <div className="flex items-center space-x-3 mb-2">
+                              {getActivityIcon(routine.activity)}
+                              <span className="text-white font-medium">{routine.activity}</span>
+                            </div>
+                            <div className="text-sm text-gray-400 mb-1">{routine.time}</div>
+                            <Badge variant="outline" className="border-purple-400/50 text-purple-300 text-xs">
+                              Upcoming
+                            </Badge>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-gray-400">No more activities for today 🎉</p>
+                      )}
+                    </div>
 
                   </CardContent>
                 </Card>

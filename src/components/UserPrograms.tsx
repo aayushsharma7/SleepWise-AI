@@ -125,7 +125,7 @@ const UserPrograms = () => {
             <div className="bg-purple-900/20 rounded-2xl p-6 border border-purple-500/20">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-sm font-medium text-yellow-300 mb-1">Hey! John Doe</p>
+                  <p className="text-sm font-medium text-purple-200 mb-1">Hey! John Doe</p>
                   <div className="flex items-center gap-2 text-sm text-purple-200">
                     <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                     Analysing Your Sleep Score...
@@ -139,7 +139,7 @@ const UserPrograms = () => {
 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-yellow-300 font-medium">Your Sleep Score</span>
+                  <span className="text-purple-200 font-medium">Your Sleep Score</span>
                   <span className="font-medium text-emerald-300">92%</span>
                 </div>
                 <Progress value={92} className="h-2 [&>*]:bg-green-600" />
@@ -186,7 +186,7 @@ const UserPrograms = () => {
                   <Brain className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-yellow-300">AI Voice chat to know your workload and sleep habits</p>
+                  <p className="font-medium text-purple-300">AI Voice chat to know your workload and sleep habits</p>
                 </div>
               </div>
 
@@ -195,7 +195,7 @@ const UserPrograms = () => {
                   <Zap className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-yellow-300">Helps build healthier routines with minimal effort</p>
+                  <p className="font-medium text-purple-300">Helps build healthier routines with minimal effort</p>
                 </div>
               </div>
 
@@ -204,7 +204,7 @@ const UserPrograms = () => {
                   <Target className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-yellow-300">Prioritizes consistency without being overly rigid</p>
+                  <p className="font-medium text-purple-300">Prioritizes consistency without being overly rigid</p>
                 </div>
               </div>
 
@@ -213,7 +213,7 @@ const UserPrograms = () => {
                   <Clock className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-yellow-300">Designed for productivity and rest throughout the week</p>
+                  <p className="font-medium text-purple-300">Designed for productivity and rest throughout the week</p>
                 </div>
               </div>
             </div>
