@@ -11,7 +11,7 @@ const Navbar = () => {
     <header className='fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-md border-b border-border py-3'>
         <div className='container mx-auto flex items-center justify-between '>
              <Link href="/" className="flex items-center gap-2">
-                <div className="p-1 bg-primary/10 rounded ml-10">
+                <div className="p-1 bg-primary/10 rounded md:ml-10">
                     <MoonStarIcon className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-xl font-bold font-mono">
@@ -19,7 +19,7 @@ const Navbar = () => {
                 </span>
             </Link>
 
-            <nav className='flex items-center gap-5'>
+            <nav className='flex items-center gap-5 md:ml-0 ml-11 '>
                 {isSignedIn ? (
                     <>
                     <Link
@@ -67,7 +67,7 @@ const Navbar = () => {
                     </SignInButton>
                     <SignUpButton>
                         <Button 
-                        className=" mr-10 bg-primary text-primary-foreground hover:bg-primary/90">
+                        className=" md:mr-10 bg-primary text-primary-foreground hover:bg-primary/90">
                             Sign Up
                         </Button>
                     </SignUpButton>

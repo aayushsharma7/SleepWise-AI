@@ -61,21 +61,21 @@ const UserPrograms = () => {
             </p>
 
             {/* STATS */}
-            <div className="flex items-center justify-center gap-16 mt-10 font-mono">
+            <div className="md:flex items-center justify-center gap-16 mt-10 font-mono">
               <div className="flex flex-col items-center">
                 <p className="text-3xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">1000+</p>
                 <p className="text-sm text-muted-foreground uppercase tracking-wide mt-1">
                   PLANS TAILORED
                 </p>
               </div>
-              <div className="w-px h-12 bg-border"></div>
+              <div className="w-px h-12 md:bg-border"></div>
               <div className="flex flex-col items-center">
                 <p className="text-3xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">2min</p>
                 <p className="text-sm text-muted-foreground uppercase tracking-wide mt-1">
                   QUICK GENERATION
                 </p>
               </div>
-              <div className="w-px h-12 bg-border"></div>
+              <div className="w-px h-12 md:bg-border"></div>
               <div className="flex flex-col items-center">
                 <p className="text-3xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">100%</p>
                 <p className="text-sm text-muted-foreground uppercase tracking-wide mt-1">
@@ -89,7 +89,7 @@ const UserPrograms = () => {
           <h1 className="font-extrabold  text-8xl bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">Explore our Features</h1>
         </div> */}
         {/* HEADER- PROGRAM GALLERY */}
-        <div className="grid grid-cols-2 gap-8 -mt-2">
+        <div className="grid md:grid-cols-2 gap-8 sm:grid-cols-1 -mt-2">
         {/* Sleep Score Card */}
         <Card className="bg-primary/10 backdrop-blur-sm overflow-hidden relative">
           {/* Mac-style window controls */}

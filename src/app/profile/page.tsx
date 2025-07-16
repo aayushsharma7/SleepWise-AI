@@ -246,7 +246,7 @@ const upcomingToday = todayRoutines
     <div className="min-h-screen mt-15">
       <div className="container mx-auto p-6 space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between ml-5 mr-5">
+        <div className="flex items-center justify-between md:ml-5 md:mr-5 ">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -258,7 +258,7 @@ const upcomingToday = todayRoutines
               </div>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 md:ml-0 ml-10 ">
             <Link
                         href="/generate-program"
                         
