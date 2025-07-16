@@ -154,7 +154,7 @@ const HomePage = () => {
                       <span className="text-xs font-medium text-green-500">LIVE</span>
                     </div>
                     <div className="text-lg font-bold text-foreground">8h 15m</div>
-                    <div className="text-xs text-muted-foreground">Tonight's Goal</div>
+                    <div className="text-xs text-muted-foreground">Tonight&apos;s Goal</div>
                   </div>
                 </div>
 

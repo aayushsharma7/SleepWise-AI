@@ -185,7 +185,7 @@ const GenerateProgramPage = () => {
             <span className="text-primary">Wise.ai</span>
           </h1>
           <p className="text-muted-foreground mt-6">
-            Have a quick conversation with SleepWise AI to build a custom sleep plan that fits your daily grind — whether you're a night-owl student or a sleep-deprived professional.          </p>
+            Have a quick conversation with SleepWise AI to build a custom sleep plan that fits your daily grind — whether you&apos;re a night-owl student or a sleep-deprived professional.          </p>
         </div>
           {/* VIDEO CALL AREA */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

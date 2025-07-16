@@ -226,7 +226,9 @@ const getTodayIndex = () => {
 const upcomingToday = todayRoutines
   .filter((routine) => {
     const [timeStr, modifier] = routine.time.split(" ")
-    let [hours, minutes] = timeStr.split(":").map(Number)
+    const timeParts = timeStr.split(":").map(Number)
+    let hours = timeParts[0]
+    const minutes = timeParts[1]
 
     if (modifier.toLowerCase() === "pm" && hours !== 12) hours += 12
     if (modifier.toLowerCase() === "am" && hours === 12) hours = 0
@@ -477,7 +479,7 @@ const upcomingToday = todayRoutines
                         </div>
                       </div>
                       <h4 className="text-white font-medium">Reason:</h4>
-                      <p className="text-gray-400 italic text-sm leading-relaxed">"{currentPlan?.sleepScore.reason}"</p>
+                      <p className="text-gray-400 italic text-sm leading-relaxed">&quot;{currentPlan?.sleepScore.reason}&quot;</p>
                     </CardContent>
                   </Card>
 
@@ -530,7 +532,7 @@ const upcomingToday = todayRoutines
                   <CardHeader>
                     <div className="flex items-center space-x-2">
                       <Activity className="h-5 w-5 text-blue-400" />
-                      <CardTitle className="text-white">Today's Upcoming Activities</CardTitle>
+                      <CardTitle className="text-white">Today&apos;s Upcoming Activities</CardTitle>
                     </div>
                     <CardDescription className="text-gray-400">
                       Your remaining sleep routine activities for today
