@@ -268,6 +268,7 @@ const upcomingToday = todayRoutines
               New Plan
             </Button>
             </Link>
+            <div className="hidden md:block">
             <Link
                         href="/"
                         
@@ -279,12 +280,14 @@ const upcomingToday = todayRoutines
             <Button variant="ghost" size="icon" className="text-white hover:bg-purple-600">
               <Settings className="h-5 w-5" />
             </Button>
+            </div>
           </div>
         </div>
 
         {allPlans && allPlans.length > 0 ? (
           <>
             {/* Profile Card */}
+            <div className="hidden md:block">
             <Card className="ml-5 mr-5 bg-gradient-to-br from-[#0a0613] via-[#1a1028] to-[#302044] border-purple-400/30 backdrop-blur-sm">
               <CardContent className="p-6 ml-3 mr-3 -mt-4 -mb-4">
                 <div className="flex items-center justify-between">
@@ -368,9 +371,10 @@ const upcomingToday = todayRoutines
                 </div>
               </CardContent>
             </Card>
+            </div>
 
             {/* Overview Cards */}
-            <div className="ml-5 mr-5 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:ml-5 md:mr-5 grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="bg-gradient-to-br from-purple-600/20 to-blue-600/20 border-purple-400/30 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer group">
                 <CardHeader className="-mt-2 flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-white/90">Sleep Score</CardTitle>
@@ -422,7 +426,7 @@ const upcomingToday = todayRoutines
             </div>
 
             {/* Main Content */}
-            <Tabs defaultValue="overview" className="space-y-6 ml-5 mr-5 flex">
+            <Tabs defaultValue="overview" className="space-y-6 md:ml-5 md:mr-5 flex">
               <div className="flex items-center justify-center">
               <TabsList className="bg-gray-800/50 border-gray-700/50 backdrop-blur-sm px-1 py-2">
                 <TabsTrigger value="overview" className="px-3 py-3 text-md data-[state=active]:bg-purple-600 data-[state=active]:text-white">
@@ -498,7 +502,7 @@ const upcomingToday = todayRoutines
                           <div key={index} className="text-center">
                             <div className="text-xs text-gray-400 mb-2 ">{day.day}</div>
                             <div
-                              className={`ml-6 w-10 h-10 rounded-full flex items-center justify-center text-xs font-medium ${
+                              className={`md:ml-6 w-10 h-10 rounded-full flex items-center justify-center text-xs font-medium ${
                                 day.completed
                                   ? "bg-green-500/20 border-2 border-green-500 text-green-400"
                                   : "bg-gray-800 border-2 border-gray-700 text-gray-500"
