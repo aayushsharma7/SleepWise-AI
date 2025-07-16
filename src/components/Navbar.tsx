@@ -60,7 +60,7 @@ const Navbar = () => {
                     <>
                     <SignInButton>
                         <Button variant={"outline"}
-                            className=' border-primary/50 text-primary hover:text-white hover:bg-primary/10'
+                            className=' -ml-6 border-primary/50 text-primary hover:text-white hover:bg-primary/10 '
                         >
                             Sign In
                         </Button>

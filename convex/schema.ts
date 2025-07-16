@@ -9,7 +9,7 @@ export default defineSchema({
         image: v.optional(v.string()),
         clerkId: v.string(),
     }) .index("by_clerk_id", ["clerkId"]),
-
+    
     plans: defineTable({
         userId: v.string(),
         name: v.string(),
@@ -28,6 +28,8 @@ export default defineSchema({
             }))
         }),
 
+        
+
         recPlan: v.object({
             sleepEfficiency: v.number(),
             solutions: v.array(v.object({
@@ -45,4 +47,6 @@ export default defineSchema({
     })
         .index("by_user_id", ["userId"]) 
         .index("by_active",["isActive"]),
+
+
 })

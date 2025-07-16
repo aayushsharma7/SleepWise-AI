@@ -218,7 +218,7 @@ const HomePage = () => {
 
             >
               <Card className='border-2'>
-                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-3'>
+                <CardHeader className=' flex flex-row items-center justify-between space-y-0 pb-3'>
                   
                   <CardTitle className='flex items-center gap-2 text-xl font-bold'>
                     <MoonStarIcon className=" text-primary w-5" />

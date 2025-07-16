@@ -28,7 +28,14 @@ import {
   Briefcase,
   MoonStarIcon,
   Home, // Added import for Home icon
-  Activity, // Added import for Activity icon
+  Activity,
+  Heart,
+  Brain,
+  Zap,
+  LeafyGreen,
+  RibbonIcon,
+  BookUserIcon,
+  Book, // Added import for Activity icon
 } from "lucide-react"
 import { useState, useEffect, useMemo } from "react"
 import { useUser } from "@clerk/nextjs"
@@ -320,10 +327,10 @@ const upcomingToday = todayRoutines
                       </div>
 
                       <div className="flex items-center space-x-6">
-                        <div className="text-center">
+                        {/* <div className="text-center">
                           <div className="text-lg font-bold text-white">{userData.currentStreak}</div>
                           <div className="text-xs text-gray-400">Streak</div>
-                        </div>
+                        </div> */}
                         <div className="text-center">
                           <div className="text-lg font-bold text-white">{allPlans.length}</div>
                           <div className="text-xs text-gray-400">Plans Created</div>
@@ -487,47 +494,67 @@ const upcomingToday = todayRoutines
                     </CardContent>
                   </Card>
 
-                  {/* Weekly Progress */}
+                  {/* Ideal Sleep */}
                   <Card className="bg-gradient-to-br from-[#0a0613] via-[#1a1028] to-[#302044] border-purple-400/30 backdrop-blur-sm">
                     
-                    <CardHeader>
-                      <div className="flex items-center space-x-2 mb-2">
-                        <CardTitle className="text-white">Weekly Progress</CardTitle>
-                      </div>
-                      <CardDescription className="text-gray-400">Track your daily sleep routine completion</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="grid grid-cols-7 gap-2 ">
-                        {weeklyProgress.map((day, index) => (
-                          <div key={index} className="text-center">
-                            <div className="text-xs text-gray-400 mb-2 ">{day.day}</div>
-                            <div
-                              className={`md:ml-6 w-10 h-10 rounded-full flex items-center justify-center text-xs font-medium ${
-                                day.completed
-                                  ? "bg-green-500/20 border-2 border-green-500 text-green-400"
-                                  : "bg-gray-800 border-2 border-gray-700 text-gray-500"
-                              }`}
-                            >
-                              {day.completed ? <CheckCircle className="h-4 w-4" /> : index + 1}
-                            </div>
-                            {day.completed && <div className="text-xs text-green-400 mt-1 ml-1">{day.score}</div>}
-                          </div>
-                        ))}
-                      </div>
+                   <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2 text-xl">
+                <Sun className="w-5 h-5 text-purple-400 " />
+                Your Ideal Sleep
+              </CardTitle>
+              <p className="text-gray-400 ">Understanding what makes a perfect night&apos;s rest</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Recommended Duration */}
+              <div>
+                <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-blue-400" />
+                  Recommended Sleep Duration
+                </h4>
+                <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-4">
+                  <p className="text-gray-300 text-sm">
+                    For most adults, the National Sleep Foundation recommends 7 to 9 hours of sleep per night.
+                    Children and teenagers need even more.
+                  </p>
+                </div>
+              </div>
 
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-gray-400">Completion Rate</span>
-                          <span className="text-white font-medium">2/7 days</span>
-                        </div>
-                        <Progress value={28.5} className="h-2" />
-                        
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-gray-400">Average Score</span>
-                          
-                        </div>
-                      </div>
-                    </CardContent>
+              {/* Benefits of Ideal Sleep */}
+              <div>
+                <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  Benefits of Quality Sleep
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="flex items-center gap-2 p-3 bg-purple-900/30 border border-purple-500/30 rounded-lg">
+                    <Heart className="w-4 h-4 text-red-400" />
+                    <span className="text-gray-300 text-sm">Improved Mood</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-purple-900/30 border border-purple-500/30 rounded-lg">
+                    <Brain className="w-4 h-4 text-yellow-400" />
+                    <span className="text-gray-300 text-sm">Enhanced Focus</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-purple-900/30 border border-purple-500/30 rounded-lg">
+                    <Zap className="w-4 h-4 text-purple-400" />
+                    <span className="text-gray-300 text-sm">Better Immunity</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-purple-900/30 border border-purple-500/30 rounded-lg">
+                    <Moon className="w-4 h-4 text-blue-400" />
+                    <span className="text-gray-300 text-sm">Physical Recovery</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-purple-900/30 border border-purple-500/30 rounded-lg">
+                    <LeafyGreen className="w-4 h-4 text-green-400" />
+                    <span className="text-gray-300 text-sm">Hormonal Balance</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-purple-900/30 border border-purple-500/30 rounded-lg">
+                    <Book className="w-4 h-4 text-orange-400" />
+                    <span className="text-gray-300 text-sm">Memory Consolidation</span>
+                  </div>
+                </div>
+              </div>
+
+             
+            </CardContent>
                   </Card>
                 </div>
 
@@ -686,7 +713,12 @@ const upcomingToday = todayRoutines
           </>
         ) : (
           <div>
-            <p className="text-center text-gray-400">No plans created yet.</p>
+            <p className="text-center text-gray-400">
+              No plans created yet.
+              <br></br>
+              Please create a new plan to get started.
+              
+              </p>
           </div>
         )}
       </div>
