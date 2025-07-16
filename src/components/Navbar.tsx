@@ -43,7 +43,7 @@ const Navbar = () => {
                         className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
                     >
                         <UserIcon size={16} />
-                        <span>Profile</span>
+                        <span>Dashboard</span>
                     </Link>
                     <Button
                         asChild
