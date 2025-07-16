@@ -92,7 +92,7 @@ const HomePage = () => {
                 <h1 className="text-5xl lg:text-7xl font-bold">
                   <span className="block text-foreground">Resync Your</span>
                   <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    Your Sleep
+                    Sleep Routine
                   </span>
                   <span className="block text-foreground">With Smart</span>
                   <span className="block text-accent">AI Insights</span>

@@ -20,11 +20,16 @@ import {
   Loader2,
   Loader2Icon,
   LogIn,
+  Zap,
+  Brain,
+  CheckCircle,
 } from "lucide-react";
 import { SLEEPWISE_FEATURES } from "@/constants";
 
 import React from "react";
 import { SignInButton } from "@clerk/nextjs";
+import { Badge } from "./ui/badge";
+import { Progress } from "./ui/progress";
 
 const UserPrograms = () => {
   return (
@@ -85,101 +90,135 @@ const UserPrograms = () => {
         </div> */}
         {/* HEADER- PROGRAM GALLERY */}
         <div className="grid grid-cols-2 gap-8 -mt-2">
-        <div className="bg-purple-800/20 backdrop-blur-sm border border-border rounded-xl overflow-hidden mb-16 mt-15">
-          {/* HEADER BAR */}
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-background/70">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-              <span className="text-sm text-primary font-medium">Sleep Score</span>
-            </div>
-            <div className="text-sm text-muted-foreground">Feel Energized</div>
+        {/* Sleep Score Card */}
+        <Card className="bg-primary/10 backdrop-blur-sm overflow-hidden relative">
+          {/* Mac-style window controls */}
+          <div className="absolute top-4 left-4 flex gap-2 z-10">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
 
-          {/* HEADER CONTENT */}
-          <div className="p-8 text-center -mt-2">
-            <h2 className="font-bold mb-6">
-              <span className="text-foreground text-4xl ">Check Your</span>
-              <br></br>
-              <span className="text-6xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Sleep Score</span>
-            </h2>
-
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
-              Get a personalized sleep score based on your age, profession, sleep habits, and daily workload.
-            </p>
-            <div className="">
-                  <div className="bg-pink-600/10 backdrop-blur-lg rounded-xl p-4 border border-primary/20">
-                    <div className="flex flex-col-2 gap-10 justify-center items-center">
-                    <div>
-                    <div className="flex -mt-3 items-center justify-center  gap-2 mb-3 ml-3">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-2xl font-bold bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">Hey! John Doe</span>
-                    </div>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center justify-center gap-2 font-semibold text-foreground">
-                        <span><Loader2Icon className="animate-spin"/></span>
-                        <span>Analysing Your Sleep Score..</span>
-                      </div>
-                      <div className="flex items-center justify-center text-lg gap-2 font-bold bg-gradient-to-r from-yellow-500 to-accent bg-clip-text text-transparent">
-                        <span></span>
-                        <span>Your Sleep Score is 92/100</span>
-                      </div>
-                    </div>
-                    </div>
-                    <div>
-                      <div className="  w-30 h-30 animate rounded-full bg-transparent border-green-500 border-6 flex flex-col justify-center items-center">
-                        <div className="flex flex-col items-center justify-center w-full px-3">
-                          <span className="text-4xl -mt-2 font-bold text-green-500">92%</span>
-                          
-                        </div>
-                      </div>
-                      
-                    </div>
-                    </div>
-                  </div>
+          <CardHeader className="pb-4 pt-12 -mt-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 text-white" />
                 </div>
-          </div>
-        </div>
-        {/* HEADER- PROGRAM GALLERY */}
-       <div className="bg-purple-700/20 backdrop-blur-sm border border-border rounded-xl overflow-hidden mb-16 mt-15">
-          {/* HEADER BAR */}
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-background/70">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-              <span className="text-sm text-primary font-medium">Routine Planner</span>
-            </div>
-            <div className="text-sm text-muted-foreground">Fully Personalized</div>
-          </div>
-
-          {/* HEADER CONTENT */}
-          <div className="p-8 text-center -mt-2">
-            <h2 className="font-bold mb-6">
-              <span className="text-foreground text-4xl ">Tailored Sleep </span>
-              <br></br>
-              <span className="text-6xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Routines</span>
-            </h2>
-
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
-              Struggling to stay consistent with sleep? Our AI learns about your lifestyle and builds a simple, personalized routine to help you sleep better.            
-            
-            </p>
-
-            <div className="-mt-4">
-                <div className="bg-pink-600/10 backdrop-blur-lg rounded-xl p-4 border border-primary/20">
-                  <ul className="font-bold  bg-gradient-to-r from-yellow-500 to-accent bg-clip-text text-transparent text-left">
-                    <li>• AI Voice chat to know your workload and sleep habits.</li>
-                    <li className="mt-1">• Helps build healthier routines with minimal effort.</li>
-                    <li className="mt-1">• Prioritizes consistency without being overly rigid.</li>
-                    <li className="mt-1">• Designed for productivity and rest throughout the week.</li>
-
-                  </ul>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Sleep Score</h2>
+                  <p className="text-sm text-purple-200">Feel Fresh</p>
                 </div>
               </div>
+              <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-400/30">Active</Badge>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6 -mt-5">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-2">Check Your Sleep Score</h3>
+              <p className="text-purple-100 leading-relaxed">
+                Get a personalized sleep score based on your age, profession, sleep habits, and daily workload.
+              </p>
+            </div>
+
+            {/* Score Display */}
+            <div className="bg-purple-900/20 rounded-2xl p-6 border border-purple-500/20">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-sm font-medium text-yellow-300 mb-1">Hey! John Doe</p>
+                  <div className="flex items-center gap-2 text-sm text-purple-200">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    Analysing Your Sleep Score...
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-white">92</div>
+                  <div className="text-sm text-purple-200">/100</div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-yellow-300 font-medium">Your Sleep Score</span>
+                  <span className="font-medium text-emerald-300">92%</span>
+                </div>
+                <Progress value={92} className="h-2 [&>*]:bg-green-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+         <Card className="bg-primary/10 backdrop-blur-sm overflow-hidden relative">
+          {/* Mac-style window controls */}
+          <div className="absolute top-4 left-4 flex gap-2 z-10">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
-        </div>
+
+          <CardHeader className="pb-4 pt-12 -mt-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-violet-400 to-purple-500 rounded-xl flex items-center justify-center">
+                  <Brain className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Routine Planner</h2>
+                  <p className="text-sm text-purple-200">Fully Personalized</p>
+                </div>
+              </div>
+              <Badge className="bg-violet-500/20 text-violet-300 border-violet-400/30">AI Powered</Badge>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6 -mt-5">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-2">Tailored Sleep Routines</h3>
+              <p className="text-purple-100 leading-relaxed">
+                Struggling to stay consistent with sleep? Our AI learns about your lifestyle and builds a simple,
+                personalized routine to help you sleep better.
+              </p>
+            </div>
+
+            {/* Features List */}
+            <div className="space-y-4 -mt-2">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Brain className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-yellow-300">AI Voice chat to know your workload and sleep habits</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Zap className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-yellow-300">Helps build healthier routines with minimal effort</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Target className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-yellow-300">Prioritizes consistency without being overly rigid</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Clock className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-yellow-300">Designed for productivity and rest throughout the week</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
         </div>
         <section className="w-full px-6 py-24 max-w-4xl mx-auto text-center -mb-20">
           <div className="space-y-8">

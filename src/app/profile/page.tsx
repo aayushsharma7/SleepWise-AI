@@ -34,6 +34,7 @@ import { useState, useEffect, useMemo } from "react"
 import { useUser } from "@clerk/nextjs"
 import { useQuery } from "convex/react"
 import { api } from "../../../convex/_generated/api"
+import Link from "next/link"
 
 const sampleSleepPlan = {
   userId: "user123",
@@ -256,14 +257,24 @@ const upcomingToday = todayRoutines
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            <Link
+                        href="/generate-program"
+                        
+            >
             <Button className="bg-purple-600 hover:bg-purple-700 text-white">
               <Plus className="h-4 w-4 mr-2" />
               New Plan
             </Button>
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+            </Link>
+            <Link
+                        href="/"
+                        
+            >
+            <Button variant="ghost" size="icon" className="text-white hover:bg-purple-600">
               <Home className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+            </Link>
+            <Button variant="ghost" size="icon" className="text-white hover:bg-purple-600">
               <Settings className="h-5 w-5" />
             </Button>
           </div>
@@ -507,7 +518,7 @@ const upcomingToday = todayRoutines
                         
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-400">Average Score</span>
-                          <span className="text-white font-medium">81.5</span>
+                          
                         </div>
                       </div>
                     </CardContent>

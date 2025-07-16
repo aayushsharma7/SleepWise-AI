@@ -231,7 +231,7 @@ const GenerateProgramPage = () => {
                   />
                 </div>
               </div>
-              <h2 className="text-xl font-bold text-foreground">SleepWise AI</h2>
+              <h2 className="text-xl font-bold text-foreground">Lumi</h2>
               <p className="text-sm text-muted-foreground mt-1">Sleep & Recovery Coach</p>
                {/* SPEAKING INDICATOR */}
 
@@ -270,9 +270,12 @@ const GenerateProgramPage = () => {
                 />
               </div>
 
-              <h2 className="text-xl font-bold text-foreground">You</h2>
-              <p className="text-sm text-muted-foreground mt-1">
+              <h2 className="text-xl font-bold text-foreground">
                 {user ? (user.firstName + " " + (user.lastName || "")).trim() : "Guest"}
+              </h2>
+              
+              <p className="text-sm text-muted-foreground mt-1">
+                You
               </p>
 
               {/* User Ready Text */}
