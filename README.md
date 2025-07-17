@@ -57,7 +57,7 @@ SleepWise is built with a **mobile-first**, **responsive** design and a **privac
 * **Frontend**: Next.js, **TypeScript**, React, TailwindCSS, **shadcn/ui**, **Framer Motion**
 * **Backend**: Convex (realtime data & serverless functions)
 * **Voice Assistant**: Vapi Voice SDK
-* * **Authentication**: Clerk
+* **Authentication**: Clerk
 * **AI Integration**:
 
   * **Google AI SDK (Gemini)** — for chat assistant & personalized plan generation
