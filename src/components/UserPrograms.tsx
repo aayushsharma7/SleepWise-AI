@@ -24,7 +24,7 @@ import {
   Brain,
   CheckCircle,
 } from "lucide-react";
-import { SLEEPWISE_FEATURES } from "@/constants";
+
 
 import React from "react";
 import { SignInButton } from "@clerk/nextjs";

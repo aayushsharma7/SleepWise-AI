@@ -1,6 +1,5 @@
 "use client"
 
-import TerminalOverlay from '@/components/TerminalOverlay'
 import { Button } from '@/components/ui/button'
 import UserPrograms from '@/components/UserPrograms'
 import { ArrowDownCircleIcon, ArrowRight, ArrowRightIcon, Loader2, MessageCircle, MoonStarIcon, Send, X, ZapIcon } from 'lucide-react'
