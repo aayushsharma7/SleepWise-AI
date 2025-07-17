@@ -12,11 +12,6 @@ SleepWise generates **personalized sleep plans** in under **2 minutes** based on
 - 🛌 Sleep habits  
 - 📅 Daily workload
 
-Over **1,000 users** have improved their sleep using SleepWise, with:
-
-- ✅ 95% satisfaction rate  
-- 🕒 7.5 hours of average sleep quality  
-
 ---
 
 ## 🧠 Key Features
@@ -42,12 +37,6 @@ Over **1,000 users** have improved their sleep using SleepWise, with:
 ---
 
 ## 🌟 Tips for Better Sleep (Backed by Science)
-
-1. Stick to consistent **sleep/wake** times.
-2. Avoid screens **1 hour** before bed.
-3. Limit **caffeine** in the evening.
-4. Get **natural sunlight** exposure daily.
-
 Following these practices leads to:
 
 - 🧠 Better mental clarity  
@@ -65,10 +54,13 @@ SleepWise is built with a **mobile-first**, **responsive** design and a **privac
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js, React, TailwindCSS, ShadCN/UI  
-- **Backend**: Convex (realtime data & serverless functions)  
-- **AI Engine**: OpenAI (via Vapi & custom workflows)  
-- **Voice Assistant**: Vapi voice SDK  
+* **Frontend**: Next.js, **TypeScript**, React, TailwindCSS, **shadcn/ui**, **Framer Motion**
+* **Backend**: Convex (realtime data & serverless functions)
+* **Voice Assistant**: Vapi Voice SDK
+* **AI Integration**:
+
+  * **Google AI SDK (Gemini)** — for chat assistant & personalized plan generation
+  * Real-time plan generation via Gemini API calls.
 
 ---
 
