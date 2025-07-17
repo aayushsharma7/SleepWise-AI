@@ -32,7 +32,7 @@ SleepWise generates **personalized sleep plans** in under **2 minutes** based on
 > Effortlessly interact with your sleep plan using natural voice commands.
 
 ### 📊 Sleep Score & Analysis
-> Get a **personalized sleep score** with detailed insights and improvement tracking.
+> Get a **personalized sleep score** with detailed insights.
 
 ---
 
@@ -57,6 +57,7 @@ SleepWise is built with a **mobile-first**, **responsive** design and a **privac
 * **Frontend**: Next.js, **TypeScript**, React, TailwindCSS, **shadcn/ui**, **Framer Motion**
 * **Backend**: Convex (realtime data & serverless functions)
 * **Voice Assistant**: Vapi Voice SDK
+* * **Authentication**: Clerk
 * **AI Integration**:
 
   * **Google AI SDK (Gemini)** — for chat assistant & personalized plan generation
