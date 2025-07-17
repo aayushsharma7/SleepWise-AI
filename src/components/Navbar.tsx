@@ -19,31 +19,34 @@ const Navbar = () => {
                 </span>
             </Link>
 
-            <nav className='flex items-center gap-5 md:ml-0 ml-11 '>
+            <nav className='flex items-center gap-5 md:ml-0 ml-4 '>
                 {isSignedIn ? (
                     <>
+                    
+                    <Link
+                        href="/profile"
+                        className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+                    >
+                        <UserIcon size={16} />
+                        <span>Dashboard</span>
+                    </Link>
+                    <Link
+                        href="/generate-program"
+                        className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+                    >
+                        
+                        
+                        
+                        <MoonIcon size={16} />
+                        <span>Analyse</span>
+                    </Link>
+
                     <Link
                         href="/"
                         className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
                     >
                         <HomeIcon size={16} />
                         <span>Home</span>
-                    </Link>
-
-                    <Link
-                        href="/generate-program"
-                        className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
-                    >
-                        <MoonIcon size={16} />
-                        <span>Analyse</span>
-                    </Link>
-
-                     <Link
-                        href="/profile"
-                        className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
-                    >
-                        <UserIcon size={16} />
-                        <span>Dashboard</span>
                     </Link>
                     <Button
                         asChild
