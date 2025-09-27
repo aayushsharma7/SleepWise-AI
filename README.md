@@ -17,7 +17,7 @@ SleepWise generates **personalized sleep plans** in under **2 minutes** based on
 ##  Key Features
 
 ###  Personalized Sleep Planning
-> **100% tailored routines** based on lifestyle, sleep issues, and recovery needs.
+ **100% tailored routines** based on lifestyle, sleep issues, and recovery needs.
 
 ###  AI-Generated Daily Routines
 - Real-time feedback and smart optimizations.
@@ -29,10 +29,10 @@ SleepWise generates **personalized sleep plans** in under **2 minutes** based on
   -  Deep work blocks  
 
 ###  Voice-Enabled AI Assistant
-> Effortlessly interact with your sleep plan using natural voice commands.
+ Effortlessly interact with your sleep plan using natural voice commands.
 
 ###  Sleep Score & Analysis
-> Get a **personalized sleep score** with detailed insights.
+ Get a **personalized sleep score** with detailed insights.
 
 ---
 
