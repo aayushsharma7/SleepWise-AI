@@ -3,56 +3,50 @@
 **SleepWise** is an AI-powered sleep optimization platform built to help **students and professionals** rebuild their sleep routines for better **energy**, **focus**, and **overall well-being**.
 ---
 
-## 🚀 What is SleepWise?
+##  What is SleepWise?
 
 SleepWise generates **personalized sleep plans** in under **2 minutes** based on your:
 
-- 🧠 Age  
-- 💼 Profession  
-- 🛌 Sleep habits  
-- 📅 Daily workload
+-  Age  
+-  Profession  
+-  Sleep habits  
+-  Daily workload
 
 ---
 
-## 🧠 Key Features
+##  Key Features
 
-### 🎯 Personalized Sleep Planning
+###  Personalized Sleep Planning
 > **100% tailored routines** based on lifestyle, sleep issues, and recovery needs.
 
-### 🤖 AI-Generated Daily Routines
+###  AI-Generated Daily Routines
 - Real-time feedback and smart optimizations.
 - Full **7-day planner** including:
-  - ☀️ Wake-up light exposure  
-  - 🧘 Bedtime wind-downs  
-  - 💪 Exercise sessions  
-  - 🍽️ Dinner timing  
-  - 📚 Deep work blocks  
+  -  Wake-up light exposure  
+  -  Bedtime wind-downs  
+  -  Exercise sessions  
+  -  Dinner timing  
+  -  Deep work blocks  
 
-### 🗣️ Voice-Enabled AI Assistant
+###  Voice-Enabled AI Assistant
 > Effortlessly interact with your sleep plan using natural voice commands.
 
-### 📊 Sleep Score & Analysis
+###  Sleep Score & Analysis
 > Get a **personalized sleep score** with detailed insights.
 
 ---
 
-## 🌟 Tips for Better Sleep (Backed by Science)
+##  Tips for Better Sleep (Backed by Science)
 Following these practices leads to:
 
-- 🧠 Better mental clarity  
-- 💪 Stronger immune function  
-- ⏩ Faster recovery  
-- 🧬 Improved memory consolidation  
+-  Better mental clarity  
+-  Stronger immune function  
+-  Faster recovery  
+-  Improved memory consolidation  
 
 ---
 
-## 🔐 Privacy-First & Cross-Platform
-
-SleepWise is built with a **mobile-first**, **responsive** design and a **privacy-first architecture**, ensuring a seamless and secure experience across all devices.
-
----
-
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * **Frontend**: Next.js, **TypeScript**, React, TailwindCSS, **shadcn/ui**, **Framer Motion**
 * **Backend**: Convex (realtime data & serverless functions)
@@ -65,7 +59,7 @@ SleepWise is built with a **mobile-first**, **responsive** design and a **privac
 
 ---
 
-## 📦 Getting Started (Dev Setup)
+##  Getting Started (Dev Setup)
 
 ```bash
 # 1. Clone the repo
